@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -11,74 +11,121 @@
     android:orientation="vertical"
     tools:context="net.xamous.bezierinterpolatordemo.SampleActivity">
 
-    <ImageView
-        android:id="@+id/actor"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/rocket"/>
-
-    <net.xamous.bezierinterpolatordemo.BezierView
-        android:id="@+id/bezierView"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="70dp"
-        android:layout_marginRight="70dp"
-        android:layout_centerVertical="true"
-        />
+        android:orientation="horizontal">
 
-    <SeekBar
-        android:id="@+id/seekBar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        />
+        <net.xamous.bezierinterpolatordemo.BezierView
+            android:id="@+id/bezierView"
+            android:layout_width="130dp"
+            android:layout_height="130dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            />
 
-    <TextView
-        android:id="@+id/duration"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@id/seekBar"
-        android:layout_centerHorizontal="true"
-        android:textAppearance="?android:textAppearanceMedium"
-        android:textAllCaps="true"
-        android:textColor="#555"
-        android:text="@string/duration"/>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_centerInParent="true">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+                    <TextView
+                        android:id="@+id/duration"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerHorizontal="true"
+                        android:textAppearance="?android:textAppearanceMedium"
+                        android:textAllCaps="true"
+                        android:textColor="#555"
+                        android:text="@string/duration"/>
+
+                    <SeekBar
+                        android:id="@+id/seekBar"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+                    <TextView
+                        android:id="@+id/scaleStart"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerHorizontal="true"
+                        android:textAppearance="?android:textAppearanceMedium"
+                        android:textAllCaps="true"
+                        android:textColor="#555"
+                        android:text="@string/duration"/>
+
+                    <SeekBar
+                        android:id="@+id/seekBarscaleStart"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+                    <TextView
+                        android:id="@+id/scaleEnd"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerHorizontal="true"
+                        android:textAppearance="?android:textAppearanceMedium"
+                        android:textAllCaps="true"
+                        android:textColor="#555"
+                        android:text="@string/duration"/>
+
+                    <SeekBar
+                        android:id="@+id/seekBarScaleEnd"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </RelativeLayout>
+
+    </LinearLayout>
 
     <TextView
         android:id="@+id/parameters"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@id/duration"
         android:layout_centerHorizontal="true"
         android:textAppearance="?android:textAppearanceMedium"
         android:textColor="#777"
         android:gravity="center"
         android:text="@string/parameters"/>
 
-    <Switch
-        android:id="@+id/toggle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/actor"
-        android:layout_centerHorizontal="true"
-        android:padding="10dp"
-        />
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBaseline="@id/toggle"
-        android:layout_toLeftOf="@id/toggle"
-        android:textAppearance="?android:attr/textAppearanceSmall"
-        android:text="@string/bezier_interpolator"/>
+        <ImageView
+            android:id="@+id/actor"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:src="@mipmap/ic_launcher"/>
 
+    </RelativeLayout>
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBaseline="@id/toggle"
-        android:layout_toRightOf="@id/toggle"
-        android:textAppearance="?android:attr/textAppearanceSmall"
-        android:text="@string/path_interpolator_compat"/>
-
-</RelativeLayout>
+</LinearLayout>
