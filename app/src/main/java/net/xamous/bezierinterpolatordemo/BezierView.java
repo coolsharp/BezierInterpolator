@@ -136,7 +136,7 @@ public class BezierView extends View {
     }
 
     private int getHandleSize() {
-        return getWidth() / 30;
+        return getWidth() / 10;
     }
 
     private int getIndicatorSize() {

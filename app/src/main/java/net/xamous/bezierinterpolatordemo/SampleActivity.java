@@ -37,12 +37,21 @@ public class SampleActivity extends AppCompatActivity implements BezierView.OnCu
     protected SeekBar seekBarScaleEnd;
     protected TextView textViewScaleEnd;
 
+    protected SeekBar seekBarAlphaStart;
+    protected TextView textViewAlphaStart;
+
+    protected SeekBar seekBarAlphaEnd;
+    protected TextView textViewAlphaEnd;
+
     //    protected ValueAnimator mActorAnim;
     protected Interpolator mInterpolator;
     protected long mDuration;
 
     protected float startScale;
     protected float endScale;
+
+    protected float startAlpha;
+    protected float endAlpha;
 
     protected final static float DEFAULT_X1 = 0;
     protected final static float DEFAULT_Y1 = .5f;
@@ -52,7 +61,7 @@ public class SampleActivity extends AppCompatActivity implements BezierView.OnCu
 
     protected final static int REPEAT_DELAY = 500;
     protected final static int MIN_DURATION = 100;
-    protected final static int MAX_DURATION = 5000;
+    protected final static int MAX_DURATION = 1000;
 
 
 
@@ -72,7 +81,7 @@ public class SampleActivity extends AppCompatActivity implements BezierView.OnCu
 
         textViewScaleStart = (TextView) findViewById(R.id.scaleStart);
 
-        seekBarScaleStart = (SeekBar) findViewById(R.id.seekBarscaleStart);
+        seekBarScaleStart = (SeekBar) findViewById(R.id.seekBarScaleStart);
         seekBarScaleStart.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
@@ -116,6 +125,52 @@ public class SampleActivity extends AppCompatActivity implements BezierView.OnCu
         seekBarScaleEnd.setMax(200);
         seekBarScaleEnd.setProgress(150);
 
+        textViewAlphaStart = (TextView) findViewById(R.id.alphaStart);
+
+        seekBarAlphaStart = (SeekBar) findViewById(R.id.seekBarAlphaStart);
+        seekBarAlphaStart.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                textViewAlphaStart.setText("시작 투명도 : " + progress + "%");
+                startAlpha = (float)progress / 100f;
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+
+            }
+        });
+        seekBarAlphaStart.setMax(100);
+        seekBarAlphaStart.setProgress(50);
+
+        textViewAlphaEnd = (TextView) findViewById(R.id.alphaEnd);
+
+        seekBarAlphaEnd = (SeekBar) findViewById(R.id.seekBarAlphaEnd);
+        seekBarAlphaEnd.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                textViewAlphaEnd.setText("종료 투명도 : " + progress + "%");
+                endAlpha = (float)progress / 100f;
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+
+            }
+        });
+        seekBarAlphaEnd.setMax(100);
+        seekBarAlphaEnd.setProgress(100);
+
         mBezierView = (BezierView) findViewById(R.id.bezierView);
         mBezierView.setCurve(DEFAULT_X1, DEFAULT_Y1, DEFAULT_X2, DEFAULT_Y2);
         mBezierView.setOnCurveChangedListener(this);
@@ -129,22 +184,32 @@ public class SampleActivity extends AppCompatActivity implements BezierView.OnCu
         mActor.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ObjectAnimator scaleDownX;
-                ObjectAnimator scaleDownY;
-                ValueAnimator mIndicatorAnim;
-                AnimatorSet mAnimatorSet;
-                scaleDownX = ObjectAnimator.ofFloat(mActor, "scaleX", startScale, endScale);
+                ObjectAnimator scaleDownX = ObjectAnimator.ofFloat(mActor, "scaleX", startScale, endScale);
                 scaleDownX.setInterpolator(mInterpolator);
-                scaleDownY = ObjectAnimator.ofFloat(mActor, "scaleY", startScale, endScale);
+                ObjectAnimator scaleDownY = ObjectAnimator.ofFloat(mActor, "scaleY", startScale, endScale);
+                scaleDownY.setInterpolator(mInterpolator);
+                ObjectAnimator alpha = ObjectAnimator.ofFloat(mActor, "alpha", startAlpha, endAlpha);
                 scaleDownY.setInterpolator(mInterpolator);
 
-                mIndicatorAnim = ObjectAnimator.ofFloat(mBezierView, "indicatorPos", 0, 1);
+                ValueAnimator mIndicatorAnim = ObjectAnimator.ofFloat(mBezierView, "indicatorPos", 0, 1);
                 mIndicatorAnim.setInterpolator(new LinearInterpolator());
 
-                mAnimatorSet = new AnimatorSet();
-                mAnimatorSet.playTogether(scaleDownX, scaleDownY, mIndicatorAnim);
+                AnimatorSet mAnimatorSet = new AnimatorSet();
+                mAnimatorSet.playTogether(scaleDownX, scaleDownY, alpha, mIndicatorAnim);
                 mAnimatorSet.setDuration(mDuration);
                 mAnimatorSet.start();
+            }
+        });
+
+        findViewById(R.id.reset).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                seekBarScaleStart.setProgress(50);
+                seekBarScaleEnd.setProgress(150);
+                seekBarAlphaStart.setProgress(50);
+                seekBarAlphaEnd.setProgress(100);
+                mSeekBar.setProgress(DEFAULT_DURATION);
+                mBezierView.setCurve(DEFAULT_X1, DEFAULT_Y1, DEFAULT_X2, DEFAULT_Y2);
             }
         });
     }

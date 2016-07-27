@@ -70,7 +70,7 @@
                         android:text="@string/duration"/>
 
                     <SeekBar
-                        android:id="@+id/seekBarscaleStart"
+                        android:id="@+id/seekBarScaleStart"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         />
@@ -98,6 +98,56 @@
                         />
 
                 </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+                    <TextView
+                        android:id="@+id/alphaStart"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerHorizontal="true"
+                        android:textAppearance="?android:textAppearanceMedium"
+                        android:textAllCaps="true"
+                        android:textColor="#555"
+                        android:text="@string/duration"/>
+
+                    <SeekBar
+                        android:id="@+id/seekBarAlphaStart"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+                    <TextView
+                        android:id="@+id/alphaEnd"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerHorizontal="true"
+                        android:textAppearance="?android:textAppearanceMedium"
+                        android:textAllCaps="true"
+                        android:textColor="#555"
+                        android:text="@string/duration"/>
+
+                    <SeekBar
+                        android:id="@+id/seekBarAlphaEnd"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        />
+
+                </LinearLayout>
+
+                <Button
+                    android:id="@+id/reset"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="초기화"/>
 
             </LinearLayout>
 
